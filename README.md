@@ -3,12 +3,12 @@
 <div align="center">
 
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-API-black?style=for-the-badge&logo=flask)
+![REST API](https://img.shields.io/badge/REST-API-black?style=for-the-badge)
 ![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![SVD](https://img.shields.io/badge/SVD-Collaborative%20Filtering-orange?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
 
-**A collaborative filtering-based movie recommendation system with a Flask API and MySQL backend.**
+**A collaborative filtering-based movie recommendation system with a REST API and MySQL backend.**
 
 [Overview](#-overview) · [Architecture](#️-architecture) · [Setup](#-setup) · [How It Works](#-how-it-works)
 
@@ -18,7 +18,7 @@
 
 ## Overview
 
-A backend OTT recommendation engine that uses **SVD (Singular Value Decomposition)** to predict personalised movie ratings for users — served via a **Flask REST API**.
+A backend OTT recommendation engine that uses **SVD (Singular Value Decomposition)** to predict personalised movie ratings for users — served via a **REST API**.
 
 The system loads real movie, user, and rating data into **MySQL**, trains a collaborative filtering model using the `Surprise` library, caches predictions, and serves them through API endpoints with a dashboard for stats and recommendations.
 
@@ -38,7 +38,7 @@ ott-recommendation/
 │   └── create_tables.sql   # MySQL schema
 │
 ├── src/
-│   ├── app.py              # Flask API server
+│   ├── server.py           # API server
 │   ├── db_config.py        # MySQL connection config
 │   ├── load_data.py        # Loads CSV data into MySQL
 │   ├── train_model.py      # Trains SVD model & caches predictions
@@ -73,7 +73,7 @@ CSV Data (Movies / Users / Ratings)
             ↓
        MySQL predictions table
             ↓
-       Flask API (app.py)
+       REST API (server.py)
 ```
 
 ---
@@ -95,7 +95,7 @@ Predictions are generated for every unseen (user, movie) pair and cached to `pre
 `store_predictions.py` reads the cached CSV and bulk-inserts predictions into the MySQL `predictions` table.
 
 ### 4. Serving Recommendations
-`app.py` exposes REST endpoints that query the predictions table and return personalised movie recommendations ranked by predicted rating.
+`server.py` exposes REST endpoints that query the predictions table and return personalised movie recommendations ranked by predicted rating.
 
 ---
 
@@ -179,7 +179,7 @@ python store_predictions.py
 
 ### 8. Run the server
 ```bash
-python app.py
+python server.py
 ```
 
 The API will be available at **http://localhost:5000**.
@@ -189,8 +189,7 @@ The API will be available at **http://localhost:5000**.
 ## Requirements
 
 ```
-flask
-flask-cors
+
 mysql-connector-python
 pandas
 scikit-surprise
@@ -209,4 +208,4 @@ scikit-surprise
 
 ## Tags
 
-`Python` `Flask` `MySQL` `SVD` `Collaborative Filtering` `Recommendation System` `Machine Learning` `Surprise` `OTT` `REST API`
+`Python` `MySQL` `SVD` `Collaborative Filtering` `Recommendation System` `Machine Learning` `Surprise` `OTT` `REST API`
