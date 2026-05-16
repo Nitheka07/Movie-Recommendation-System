@@ -1,7 +1,7 @@
 # src/app.py
 # Flask API — serves the UI and recommendation endpoints
 
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import mysql.connector
 import os
@@ -10,20 +10,12 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from db_config import DB_CONFIG
 
-# Build absolute path to ui/ folder regardless of where script is run from
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UI_DIR = os.path.join(BASE_DIR, "ui")
-
-app = Flask(__name__, static_folder=UI_DIR, static_url_path="")
+app = Flask(__name__)
 CORS(app)
 
 def get_connection():
     return mysql.connector.connect(**DB_CONFIG)
 
-# ── Serve UI ──────────────────────────────────────────────
-@app.route("/")
-def index():
-    return send_from_directory(UI_DIR, "index.html")
 
 # ── Get all users ─────────────────────────────────────────
 @app.route("/api/users")

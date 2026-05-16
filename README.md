@@ -18,7 +18,7 @@
 
 ## Overview
 
-A full-stack OTT recommendation engine that uses **SVD (Singular Value Decomposition)** to predict personalised movie ratings for users — served via a **Flask REST API** with a clean web UI.
+A backend OTT recommendation engine that uses **SVD (Singular Value Decomposition)** to predict personalised movie ratings for users — served via a **Flask REST API**.
 
 The system loads real movie, user, and rating data into **MySQL**, trains a collaborative filtering model using the `Surprise` library, caches predictions, and serves them through API endpoints with a dashboard for stats and recommendations.
 
@@ -44,9 +44,6 @@ ott-recommendation/
 │   ├── train_model.py      # Trains SVD model & caches predictions
 │   ├── store_predictions.py# Stores predictions CSV into MySQL
 │   └── recommend.py        # Query recommendations for a user
-│
-├── ui/
-│   └── index.html          # Web dashboard
 │
 ├── requirements.txt
 └── README.md
@@ -77,8 +74,6 @@ CSV Data (Movies / Users / Ratings)
        MySQL predictions table
             ↓
        Flask API (app.py)
-            ↓
-       Web UI (index.html)
 ```
 
 ---
@@ -108,7 +103,6 @@ Predictions are generated for every unseen (user, movie) pair and cached to `pre
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/` | Web dashboard |
 | GET | `/api/users` | List all users |
 | GET | `/api/movies` | List all movies (sorted by IMDB rating) |
 | GET | `/api/recommend/<user_id>` | Top-N recommendations for a user |
@@ -142,8 +136,8 @@ predictions → user_id, movie_id, predicted_rating
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/AmithaMahesh/ott-recommendation.git
-cd ott-recommendation
+git clone https://github.com/Nitheka07/Movie-Recommendation-System.git
+cd Movie-Recommendation-System
 ```
 
 ### 2. Install dependencies
@@ -188,7 +182,7 @@ python store_predictions.py
 python app.py
 ```
 
-Visit **http://localhost:5000** to open the dashboard.
+The API will be available at **http://localhost:5000**.
 
 ---
 
@@ -210,7 +204,6 @@ scikit-surprise
 - Real-time model retraining on new ratings
 - Content-based filtering hybrid (genres, cast, director)
 - Deployed cloud version
-- Movie search and filter on the UI
 
 ---
 
